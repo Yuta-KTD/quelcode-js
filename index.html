@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>世界の天気</title>
+  </head>
+  <body>
+    <h1>世界の天気</h1>
+    <div>
+      現在の天気を確認したい都市を選択してください。
+      <form>
+        <select name="weather" id="weather">
+          <option value="london">ロンドン</option>
+          <option value="tokyo">東京</option>
+          <option value="paris">パリ</option>
+          <option value="newYorkCity">ニューヨーク</option>
+          <option value="indonesia">インドネシア</option>
+        </select>
+        <input id="btn" type="button" value="送信" />
+      </form>
+    </div>
+    <div id="result"></div>
+    <script type="text/JavaScript" src="scripts/weather.js"></script>
+  </body>
+</html>
