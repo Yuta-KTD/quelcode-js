@@ -3,6 +3,7 @@ document.addEventListener(
   function () {
     //初期値の設定
     //<div>の各id要素を取得
+    var capital = document.getElementById("capital");
     var result_main = document.getElementById("result_main");
     var icon = document.getElementById("icon");
     var temperature = document.getElementById("temperature");
@@ -26,7 +27,8 @@ document.addEventListener(
           result_main.textContent = "存在しない地域を選択しています。";
         } else {
           //天気情報
-          //https://openweathermap.org/weather-conditions#How-to-get-icon-URLを参考に700番台以外は日本語で天気表示
+          capital.textContent = weather_data.name + "の現在の天気";
+          //https://openweathermap.org/weather-condition s#How-to-get-icon-URLを参考に700番台以外は日本語で天気表示
           result_main.textContent = weather_data.weather[0].main;
           //現在の天気の画像を取得し<img>要素に出力
           var img = document.createElement("img");
@@ -34,8 +36,8 @@ document.addEventListener(
           img.src =
             "http://openweathermap.org/img/w/" + weather_icon_img + ".png";
           img.alt = weather_data.name;
-          img.height = 100;
-          img.width = 100;
+          img.height = 60;
+          img.width = 60;
           icon.appendChild(img);
           //気温を摂氏にて小数点第一位まで四捨五入で表示
           temperature.textContent =
@@ -59,11 +61,6 @@ document.addEventListener(
     document.getElementById("btn").addEventListener(
       "click",
       function () {
-        //<div>の各id要素を取得
-        var result_main = document.getElementById("result_main");
-        var icon = document.getElementById("icon");
-        var temperature = document.getElementById("temperature");
-        var humidity = document.getElementById("humidity");
         var xhr = new XMLHttpRequest();
 
         xhr.addEventListener(
@@ -83,6 +80,7 @@ document.addEventListener(
               result_main.textContent = "存在しない地域を選択しています。";
             } else {
               //天気情報
+              capital.textContent = weather_data.name + "の現在の天気";
               //https://openweathermap.org/weather-conditions#How-to-get-icon-URLを参考に700番台以外は日本語で天気表示
               result_main.textContent = weather_data.weather[0].main;
               //現在の天気の画像を取得し<img>要素に出力
@@ -91,8 +89,8 @@ document.addEventListener(
               img.src =
                 "http://openweathermap.org/img/w/" + weather_icon_img + ".png";
               img.alt = weather_data.name;
-              img.height = 100;
-              img.width = 100;
+              img.height = 60;
+              img.width = 60;
               //
               if (icon.getElementsByTagName("img").length > 0) {
                 icon.replaceChild(img, icon.lastChild);
