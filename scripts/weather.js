@@ -1,12 +1,12 @@
 "use strict";
 
 //script要素を作成するcreateURL関数を作成
-const createURL = () => {
+const createScript = () => {
   //天気API問合せURLの作成
   //show関数を呼び出すためのcallback=showをつけた
   const base_url =
     "http://api.openweathermap.org/data/2.5/weather?callback=show&id=";
-  const appId = "4b5774e9f3d2a07b84f0f2f88e486224";
+  const appid = "4b5774e9f3d2a07b84f0f2f88e486224";
   //選択した都市のIDを取得
   let capital_id = encodeURIComponent(
     document.getElementById("capital_id").value
@@ -16,31 +16,34 @@ const createURL = () => {
     capital_id = 2643743;
   }
   //問合せURL
-  const url = `${base_url}${capital_id}&appid=${appId}`;
+  const url = `${base_url}${capital_id}&appid=${appid}`;
   //scriptタグとその要素を作成
   const new_weather_script = document.createElement("script");
   new_weather_script.src = url;
   new_weather_script.id = "weather_script";
   //scriptの置き換え
   //既存の問合せ用scriptを検索
-  // if (document.getElementById("weather_script") !== undefined) {
-  //   const old_weather_script = document.getElementById("weather_script");
-  //   document
-  //     .getElementsByTagName("body")
-  //     .item(0)
-  //     .replaceChild(new_weather_script, old_weather_script);
-  // } else {
-  //   document
-  //     .getElementsByTagName("body")
-  //     .item(0)
-  //     .appendChild(new_weather_script);
-  // }
+  if (document.getElementById("weather_script") !== null) {
+    //すでに要素が存在する場合はscriptタグを書き換え
+    let old_weather_script = document.getElementById("weather_script");
+    document
+      .getElementsByTagName("body")
+      .item(0)
+      .replaceChild(new_weather_script, old_weather_script);
+  } else {
+    //最初のロード時はscriptタグの新規作成のみ
+    document
+      .getElementsByTagName("body")
+      .item(0)
+      .appendChild(new_weather_script);
+  }
 };
 
-document.addEventListener("DOMContentLoaded", createURL(), false);
+//HTMLロード完了時
+document.addEventListener("DOMContentLoaded", createScript(), false);
 
 //「送信」ボタンクリック時
-document.getElementById("btn").addEventListener("click", createURL, false);
+document.getElementById("btn").addEventListener("click", createScript(), false);
 
 //受け取ったweather_dataを引数にコールバック関数showを実行
 const show = (weather_data) => {
