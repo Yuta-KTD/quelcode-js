@@ -1,39 +1,46 @@
-//初期値（ロンドン）の設定
+"use strict";
 
-document.addEventListener(
-  "DOMContentLoaded",
-  function () {
-    //問合せURLを作成
-    //show関数を呼び出すためのcallback=showをつけたURLを作成
-    const app_id = "4b5774e9f3d2a07b84f0f2f88e486224";
-    var url = `http://api.openweathermap.org/data/2.5/weather?callback=show&id=2643743&appid=${app_id}`;
-    //script要素の作成
-    var script = document.createElement("script");
-    script.src = url;
-    document.getElementsByTagName("body").item(0).appendChild(script);
-  },
-  false
-);
+//script要素を作成するcreateURL関数を作成
+const createURL = () => {
+  //天気API問合せURLの作成
+  //show関数を呼び出すためのcallback=showをつけた
+  const base_url =
+    "http://api.openweathermap.org/data/2.5/weather?callback=show&id=";
+  const appId = "4b5774e9f3d2a07b84f0f2f88e486224";
+  //選択した都市のIDを取得
+  let capital_id = encodeURIComponent(
+    document.getElementById("capital_id").value
+  );
+  //capital_idが入力されていない場合→ページに最初にアクセスした場合、ロンドンのIDを取得
+  if (capital_id === null) {
+    capital_id = 2643743;
+  }
+  //問合せURL
+  const url = `${base_url}${capital_id}&appid=${appId}`;
+  //scriptタグとその要素を作成
+  const new_weather_script = document.createElement("script");
+  new_weather_script.src = url;
+  new_weather_script.id = "weather_script";
+  //scriptの置き換え
+  //既存の問合せ用scriptを検索
+  // if (document.getElementById("weather_script") !== undefined) {
+  //   const old_weather_script = document.getElementById("weather_script");
+  //   document
+  //     .getElementsByTagName("body")
+  //     .item(0)
+  //     .replaceChild(new_weather_script, old_weather_script);
+  // } else {
+  //   document
+  //     .getElementsByTagName("body")
+  //     .item(0)
+  //     .appendChild(new_weather_script);
+  // }
+};
+
+document.addEventListener("DOMContentLoaded", createURL(), false);
 
 //「送信」ボタンクリック時
-document.getElementById("btn").addEventListener(
-  "click",
-  function () {
-    $appId = "4b5774e9f3d2a07b84f0f2f88e486224";
-    //問合せURLを作成
-    //show関数を呼び出すためのcallback=showをつけた
-    var url =
-      "http://api.openweathermap.org/data/2.5/weather?callback=show&id=" +
-      encodeURIComponent(document.getElementById("capital_id").value) +
-      "&appid=" +
-      $appId;
-    //script要素の作成
-    var script = document.createElement("script");
-    script.src = url;
-    document.getElementsByTagName("body").item(0).appendChild(script);
-  },
-  false
-);
+document.getElementById("btn").addEventListener("click", createURL, false);
 
 //受け取ったweather_dataを引数にコールバック関数showを実行
 const show = (weather_data) => {
@@ -44,6 +51,7 @@ const show = (weather_data) => {
     capital.textContent = `${weather_data.name} の現在の天気`;
     result_main.textContent = weather_data.weather[0].main;
     //現在の天気の画像を取得し<img>要素に出力
+    const icon = document.getElementById("icon");
     const img = document.createElement("img");
     const weather_icon_img = weather_data.weather[0].icon;
     img.src = `http://openweathermap.org/img/w/${weather_icon_img}.png`;
