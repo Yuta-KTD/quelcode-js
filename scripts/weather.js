@@ -3,7 +3,7 @@
 //script要素を作成するcreateURL関数を作成
 const createScript = () => {
   //天気API問合せURLの作成
-  //show関数を呼び出すためのcallback=showをつけた
+  //show関数を呼び出すためのcallback=showをつける
   const base_url =
     "http://api.openweathermap.org/data/2.5/weather?callback=show&id=";
   const appid = "4b5774e9f3d2a07b84f0f2f88e486224";
