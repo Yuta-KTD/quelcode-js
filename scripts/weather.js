@@ -28,7 +28,6 @@ document.addEventListener(
         } else {
           //天気情報
           capital.textContent = weather_data.name + "の現在の天気";
-          //https://openweathermap.org/weather-condition s#How-to-get-icon-URLを参考に700番台以外は日本語で天気表示
           result_main.textContent = weather_data.weather[0].main;
           //現在の天気の画像を取得し<img>要素に出力
           var img = document.createElement("img");
@@ -81,7 +80,6 @@ document.addEventListener(
             } else {
               //天気情報
               capital.textContent = weather_data.name + "の現在の天気";
-              //https://openweathermap.org/weather-conditions#How-to-get-icon-URLを参考に700番台以外は日本語で天気表示
               result_main.textContent = weather_data.weather[0].main;
               //現在の天気の画像を取得し<img>要素に出力
               var img = document.createElement("img");
