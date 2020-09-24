@@ -1,20 +1,18 @@
 "use strict";
 
+//初期値としてロンドンの都市IDを定義
+const capital_id_London = 2643743;
+//問合せURLの定数準備
+const base_url =
+  "http://api.openweathermap.org/data/2.5/weather?callback=show&id=";
+const appid = "4b5774e9f3d2a07b84f0f2f88e486224";
 //script要素を作成するcreateURL関数を作成
 const createScript = () => {
-  //天気API問合せURLの作成
   //show関数を呼び出すためのcallback=showをつける
-  const base_url =
-    "http://api.openweathermap.org/data/2.5/weather?callback=show&id=";
-  const appid = "4b5774e9f3d2a07b84f0f2f88e486224";
-  //選択した都市のIDを取得
-  let capital_id = encodeURIComponent(
-    document.getElementById("capital_id").value
-  );
-  //capital_idが入力されていない場合→ページに最初にアクセスした場合、ロンドンのIDを取得
-  if (capital_id === null) {
-    capital_id = 2643743;
-  }
+  //NULL合体演算子に
+  const capital_id =
+    encodeURIComponent(document.getElementById("capital_id").value) ||
+    capital_id_London;
   //問合せURL
   const url = `${base_url}${capital_id}&appid=${appid}`;
   //scriptタグとその要素を作成
@@ -40,10 +38,12 @@ const createScript = () => {
 };
 
 //HTMLロード完了時
-document.addEventListener("DOMContentLoaded", createScript(), false);
+document.addEventListener("DOMContentLoaded", createScript, false);
 
 //「送信」ボタンクリック時
-document.getElementById("btn").addEventListener("click", createScript(), false);
+document
+  .getElementById("capital_id")
+  .addEventListener("change", createScript, false);
 
 //受け取ったweather_dataを引数にコールバック関数showを実行
 const show = (weather_data) => {
