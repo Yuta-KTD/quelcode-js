@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>世界の天気</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <h1>世界の天気</h1>
+    <div>
+      <!-- idで各都市の情報を取得 -->
+      <!-- https://openweathermap.org/current 内の「city.list.json.gz」ファイルよりidを検索し、各valueに反映-->
+      現在の天気を確認したい都市を選択してください。
+      <form>
+        <select name="capital_id" id="capital_id">
+          <option value="2643743">ロンドン</option>
+          <option value="1850147">東京</option>
+          <option value="2968815">パリ</option>
+          <option value="5128581">ニューヨーク</option>
+          <option value="1643084">インドネシア</option>
+        </select>
+        <!-- <input id="btn" type="button" value="送信" /> -->
+      </form>
+    </div>
+    <div>
+      <h3 id="capital">参照都市名</h3>
+      <div id="result_main"></div>
+      <img id="icon" width="60" height="60" />
+      <h3>気温(&#8451;)</h3>
+      <div id="temperature"></div>
+      <h3>湿度(%)</h3>
+      <div id="humidity"></div>
+    </div>
+    <script src="scripts/weather.js"></script>
+  </body>
+</html>
