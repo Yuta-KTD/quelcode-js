@@ -40,7 +40,7 @@ const createScript = () => {
 //HTMLロード完了時
 document.addEventListener("DOMContentLoaded", createScript, false);
 
-//「送信」ボタンクリック時
+//国選択時
 document
   .getElementById("capital_id")
   .addEventListener("change", createScript, false);
